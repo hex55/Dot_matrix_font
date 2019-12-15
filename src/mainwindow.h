@@ -2,7 +2,6 @@
 #define MAINWINDOW_H
 
 #include "base.hpp"
-#include "json.hpp"
 
 #define IndexUrl "https://github.com/JackeyLea/"
 

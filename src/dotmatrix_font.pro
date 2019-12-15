@@ -18,8 +18,6 @@ SOURCES += \
 
 HEADERS += \
     base.hpp \
-    database.hpp \
-    json.hpp \
     mainwindow.h
 
 FORMS += \

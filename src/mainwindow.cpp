@@ -6,9 +6,6 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    Json jsonConfig;
-    QString theme = jsonConfig.getValue("theme");
-    this->setStyleSheet(loadTheme(theme));
 }
 
 MainWindow::~MainWindow()
