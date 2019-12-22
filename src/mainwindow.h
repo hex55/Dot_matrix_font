@@ -17,6 +17,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void drawText(QPainter *paint);
+
 private slots:
     void on_actionExit_triggered();
 
@@ -25,6 +27,8 @@ private slots:
     void on_actionQt_triggered();
 
     void on_actionIndex_triggered();
+
+    void on_buttonGenerate_clicked();
 
 private:
     Ui::MainWindow *ui;

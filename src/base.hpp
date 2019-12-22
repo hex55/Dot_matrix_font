@@ -17,6 +17,9 @@
 #include <QJsonValue>
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QPaintEvent>
+#include <QPainter>
+#include <QResizeEvent>
 #include <QSqlDatabase>
 #include <QSqlDriver>
 #include <QSqlError>
