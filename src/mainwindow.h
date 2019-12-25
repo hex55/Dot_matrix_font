@@ -17,7 +17,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    void drawText(QPainter *paint);
+    void drawText(QString text, int size);
+    QString toHex(QByteArray byte);
 
 private slots:
     void on_actionExit_triggered();
@@ -28,7 +29,11 @@ private slots:
 
     void on_actionIndex_triggered();
 
-    void on_buttonGenerate_clicked();
+    void on_textText_textChanged();
+
+    void on_comboBoxW_activated(const QString &text);
+
+    void on_comboBoxH_activated(const QString &text);
 
 private:
     Ui::MainWindow *ui;

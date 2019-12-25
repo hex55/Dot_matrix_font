@@ -2,6 +2,7 @@
 #define BASE_HPP
 
 #include <QApplication>
+#include <QBitArray>
 #include <QCloseEvent>
 #include <QDebug>
 #include <QDesktopServices>
@@ -20,6 +21,7 @@
 #include <QPaintEvent>
 #include <QPainter>
 #include <QResizeEvent>
+#include <QRgb>
 #include <QSqlDatabase>
 #include <QSqlDriver>
 #include <QSqlError>
@@ -30,7 +32,7 @@
 #include <QWidget>
 #include <QtWebKit/QtWebKit>
 
-static QString loadTheme(QString themeName){
+inline QString loadTheme(QString themeName){
     QString themeCtx;
     QFile file(QString(":/resources/themes/%1.qss").arg(themeName));
     qDebug()<<"theme file path is:"<<file.fileName();
