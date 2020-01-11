@@ -3,12 +3,16 @@
 
 #include <QApplication>
 #include <QBitArray>
+#include <QBrush>
 #include <QCloseEvent>
+#include <QColor>
+#include <QColorDialog>
 #include <QDebug>
 #include <QDesktopServices>
 #include <QDir>
 #include <QFile>
 #include <QFileDialog>
+#include <QFont>
 #include <QHeaderView>
 #include <QIcon>
 #include <QJsonArray>
@@ -20,6 +24,7 @@
 #include <QMessageBox>
 #include <QPaintEvent>
 #include <QPainter>
+#include <QPen>
 #include <QResizeEvent>
 #include <QRgb>
 #include <QSqlDatabase>

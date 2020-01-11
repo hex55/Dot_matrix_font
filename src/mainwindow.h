@@ -33,9 +33,13 @@ private slots:
 
     void on_comboBoxW_activated(const QString &text);
 
-    void on_comboBoxH_activated(const QString &text);
+    void on_comboBoxFont_currentIndexChanged(int index);
+
+    void on_buttonChooseColor_clicked();
 
 private:
     Ui::MainWindow *ui;
+
+    QColor font_color;
 };
 #endif // MAINWINDOW_H

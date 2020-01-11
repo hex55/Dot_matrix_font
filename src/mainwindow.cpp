@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    font_color = Qt::red;
 }
 
 MainWindow::~MainWindow() {
@@ -38,12 +39,17 @@ void MainWindow::drawText(QString text,int size)
     image.fill(backColor); //将位图背景设置为白色
 
     QFont font;
-    font.setFamily("SimSun"); //设置字体，宋体
+    QString family = ui->comboBoxFont->currentFont().family();
+    qDebug()<<"Current font family is: "<<family;
+    font.setFamily(family); //设置字体，宋体
     font.setPixelSize(size);    //设置字号,以像素为单位
     font.setWeight(50);       //设置字型,不加粗
     font.setItalic(false);    //设置字型,不倾斜
     font.setUnderline(false); //设置字型,无下划线
+    QPen pen;
+    pen.setBrush(QBrush(font_color));
     painter.setFont(font);
+    painter.setPen(pen);
     int flats = Qt::AlignCenter |Qt::AlignTop;
     painter.drawText(0,0,size,size,flats,text);
 
@@ -58,7 +64,11 @@ void MainWindow::drawText(QString text,int size)
 //        painter.drawLine(0,i,size,i);
 //    }
 
-    int count = 0;
+    ui->labelDisplay->setPixmap(QPixmap::fromImage(image).scaled(ui->labelDisplay->size()));
+
+    //代码计算
+    int count=0;
+    QString result;
     QImage img = image;
     for(int i=0;i<size;i++){
         QByteArray byte;
@@ -69,14 +79,14 @@ void MainWindow::drawText(QString text,int size)
             }
             else byte.append('0');
             if((j+1)%8==0){
-                qDebug()<<count++;
-                qDebug()<<byte;
+                count++;
+                result += toHex(byte)+',';
                 byte.clear();
+                if(count%8==0) result+='\n';
             }
         }
     }
-
-    ui->labelFont->setPixmap(QPixmap::fromImage(img).scaled(ui->labelFont->size()));
+    ui->textResultCpp->setPlainText(result);
 }
 //将QByteArray转换为十六进制字符串
 QString MainWindow::toHex(QByteArray byte)
@@ -87,7 +97,8 @@ QString MainWindow::toHex(QByteArray byte)
         sum=sum+(byte.at(i)-'0')*temp;
         temp*=2;
     }
-    return "0x"+QString::number(sum);
+
+    return "0x"+QString::number(sum,16);
 }
 
 void MainWindow::on_textText_textChanged()
@@ -101,12 +112,16 @@ void MainWindow::on_textText_textChanged()
 
 void MainWindow::on_comboBoxW_activated(const QString &text)
 {
-    ui->comboBoxH->setCurrentText(text);
     if(!ui->textText->toPlainText().isEmpty()) on_textText_textChanged();
 }
 
-void MainWindow::on_comboBoxH_activated(const QString &text)
+void MainWindow::on_comboBoxFont_currentIndexChanged(int index)
 {
-    ui->comboBoxW->setCurrentText(text);
+    Q_UNUSED(index)
     if(!ui->textText->toPlainText().isEmpty()) on_textText_textChanged();
+}
+
+void MainWindow::on_buttonChooseColor_clicked()
+{
+    font_color = QColorDialog::getColor(Qt::red,this,tr("Choose Color"));
 }
